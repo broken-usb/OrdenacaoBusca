@@ -52,6 +52,6 @@
             <Button x:Name="StatisticsButton" Content="Estatísticas" Width="80" Margin="0,0,10,0" HorizontalAlignment="Right"/>
             <Button x:Name="ExitButton" Content="Sair" Width="100" HorizontalAlignment="Right"/>
         </StackPanel>
-        <TextBlock x:Name="ResultsTextBlock" Text="Resultados aparecerão aqui..." VerticalAlignment="Top" Margin="1,100,0,0" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="ResultsTextBlock" Text="Resultados aparecerão aqui..." VerticalAlignment="Top" Margin="1,100,0,0" HorizontalAlignment="Left" Grid.Row="2" TextWrapping="Wrap" Grid.ColumnSpan="5" Height="18" Width="432"/>
     </Grid>
 </Window>

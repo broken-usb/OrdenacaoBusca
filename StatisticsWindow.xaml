@@ -1,0 +1,25 @@
+﻿<Window x:Class="ProjetoB2_OrdenacaoBusca.StatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Statistics" Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock 
+                   FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"><Run Language="pt-br" Text="Estatística Coletadas"/></TextBlock>
+
+        <!-- Statistics Table -->
+        <DataGrid Name="StatisticsGrid" Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True" Margin="0,10,0,10"/>
+
+        <ListBox Name="StatisticsListBox" Grid.Row="1" />
+        <StackPanel Grid.Row="1"/>
+
+        <!-- Buttons -->
+        <Button Grid.Row="2" Content="Sair" Width="100" HorizontalAlignment="Center" Click="CloseWindow"/>
+    </Grid>
+</Window>

@@ -1,0 +1,28 @@
+﻿<Window x:Class="ProjetoB2_OrdenacaoBusca.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock 
+                   FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"><Run Language="pt-br" Text="Configurações Adicionais"/></TextBlock>
+
+        <!-- Settings Content -->
+        <StackPanel Grid.Row="1">
+            <TextBlock Margin="0,0,0,5"><Run Language="pt-br" Text="Intervalo de Atualização (ms)"/></TextBlock>
+            <TextBox Name="DelayInput" Width="200" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Salvar" Width="80" Margin="0,0,10,0" Click="SaveSettings"/>
+            <Button Content="Cancelar" Width="80" Click="CloseWindow"/>
+        </StackPanel>
+    </Grid>
+</Window>

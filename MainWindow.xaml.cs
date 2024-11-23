@@ -282,6 +282,7 @@ namespace ProjetoB2_OrdenacaoBusca
             {
                 double barHeight = (values[i] / maxValue) * canvasHeight;
 
+                // Cria a barra
                 var rect = new Rectangle
                 {
                     Width = barWidth - 2,
@@ -289,11 +290,27 @@ namespace ProjetoB2_OrdenacaoBusca
                     Fill = Brushes.SteelBlue
                 };
 
+                // Define a posição da barra
                 Canvas.SetLeft(rect, i * barWidth);
                 Canvas.SetTop(rect, canvasHeight - barHeight);
                 GraphCanvas.Children.Add(rect);
+
+                // Adiciona o rótulo do valor
+                var label = new TextBlock
+                {
+                    Text = values[i].ToString(),
+                    Foreground = Brushes.Black,
+                    FontSize = 8,
+                    TextAlignment = TextAlignment.Center
+                };
+
+                // Define a posição do rótulo
+                Canvas.SetLeft(label, i * barWidth + (barWidth - label.ActualWidth) / 2);
+                Canvas.SetTop(label, canvasHeight - barHeight - 10); // Posição acima da barra
+                GraphCanvas.Children.Add(label);
             }
         }
+
 
         private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -407,18 +424,35 @@ namespace ProjetoB2_OrdenacaoBusca
             {
                 double barHeight = (currentValues[i] / maxValue) * canvasHeight;
 
+                // Cria a barra
                 var rect = new Rectangle
                 {
                     Width = barWidth - 2,
                     Height = barHeight,
-                    Fill = i == index ? color : Brushes.SteelBlue
+                    Fill = i == index ? color : Brushes.SteelBlue // Destaque para a barra em análise
                 };
 
+                // Define a posição da barra
                 Canvas.SetLeft(rect, i * barWidth);
                 Canvas.SetTop(rect, canvasHeight - barHeight);
                 GraphCanvas.Children.Add(rect);
+
+                // Adiciona o rótulo do valor
+                var label = new TextBlock
+                {
+                    Text = currentValues[i].ToString(),
+                    Foreground = Brushes.Black,
+                    FontSize = 8,
+                    TextAlignment = TextAlignment.Center
+                };
+
+                // Define a posição do rótulo
+                Canvas.SetLeft(label, i * barWidth + (barWidth - label.ActualWidth) / 2);
+                Canvas.SetTop(label, canvasHeight - barHeight - 10); // Posição acima da barra
+                GraphCanvas.Children.Add(label);
             }
         }
+
 
     }
 }

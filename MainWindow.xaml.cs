@@ -294,5 +294,131 @@ namespace ProjetoB2_OrdenacaoBusca
                 GraphCanvas.Children.Add(rect);
             }
         }
+
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentValues == null || !currentValues.Any())
+            {
+                MessageBox.Show("Gere ou ordene os valores primeiro.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!int.TryParse(SearchValueTextBox.Text, out int searchValue))
+            {
+                MessageBox.Show("Insira um número válido para buscar.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string selectedMethod = ((ComboBoxItem)SearchMethodComboBox.SelectedItem)?.Content?.ToString();
+            if (string.IsNullOrEmpty(selectedMethod))
+            {
+                MessageBox.Show("Selecione um método de busca.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                int comparisons = 0;
+                int index = -1;
+
+                if (selectedMethod == "Binary Search (Iterative)")
+                {
+                    index = await PerformBinarySearchIterative(currentValues.ToArray(), searchValue, comparisons);
+                }
+                else if (selectedMethod == "Binary Search (Recursive)")
+                {
+                    index = await PerformBinarySearchRecursive(currentValues.ToArray(), searchValue, 0, currentValues.Count - 1, comparisons);
+                }
+
+                if (index >= 0)
+                {
+                    ResultsTextBlock.Text = $"Valor {searchValue} encontrado na posição {index}. Comparações: {comparisons}.";
+                }
+                else
+                {
+                    ResultsTextBlock.Text = $"Valor {searchValue} não encontrado. Comparações: {comparisons}.";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro durante a busca: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task<int> PerformBinarySearchIterative(int[] array, int target, int comparisons)
+        {
+            int left = 0, right = array.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+
+                // Atualiza o gráfico para destacar o valor atual
+                HighlightValueInGraph(mid, Brushes.Red);
+                await Task.Delay(sortingDelay);
+
+                comparisons++;
+                if (array[mid] == target)
+                    return mid;
+
+                if (array[mid] < target)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+
+            return -1;
+        }
+
+        private async Task<int> PerformBinarySearchRecursive(int[] array, int target, int left, int right, int comparisons)
+        {
+            if (left > right)
+                return -1;
+
+            int mid = (left + right) / 2;
+
+            // Atualiza o gráfico para destacar o valor atual
+            HighlightValueInGraph(mid, Brushes.Red);
+            await Task.Delay(sortingDelay);
+
+            comparisons++;
+            if (array[mid] == target)
+                return mid;
+
+            if (array[mid] > target)
+                return await PerformBinarySearchRecursive(array, target, left, mid - 1, comparisons);
+
+            return await PerformBinarySearchRecursive(array, target, mid + 1, right, comparisons);
+        }
+
+        private void HighlightValueInGraph(int index, Brush color)
+        {
+            GraphCanvas.Children.Clear();
+
+            if (currentValues == null || !currentValues.Any()) return;
+
+            double canvasWidth = GraphCanvas.ActualWidth;
+            double canvasHeight = GraphCanvas.ActualHeight;
+            double barWidth = canvasWidth / currentValues.Count;
+
+            double maxValue = currentValues.Max();
+
+            for (int i = 0; i < currentValues.Count; i++)
+            {
+                double barHeight = (currentValues[i] / maxValue) * canvasHeight;
+
+                var rect = new Rectangle
+                {
+                    Width = barWidth - 2,
+                    Height = barHeight,
+                    Fill = i == index ? color : Brushes.SteelBlue
+                };
+
+                Canvas.SetLeft(rect, i * barWidth);
+                Canvas.SetTop(rect, canvasHeight - barHeight);
+                GraphCanvas.Children.Add(rect);
+            }
+        }
+
     }
 }

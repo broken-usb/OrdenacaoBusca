@@ -36,6 +36,13 @@
             <Button x:Name="SortValuesButton" Content="Ordenar" Width="70" Margin="0,0,10,0"/>
             <Button x:Name="OriginalValuesButton" Content="Valores Originais" Width="100" Margin="0,0,10,0"/>
 
+            <ComboBox x:Name="SearchMethodComboBox" Width="150" Margin="0,0,10,0">
+                <ComboBoxItem Content="Binary Search (Iterative)"/>
+                <ComboBoxItem Content="Binary Search (Recursive)"/>
+            </ComboBox>
+            <TextBox x:Name="SearchValueTextBox" Width="60" Margin="0,0,10,0"/>
+            <Button x:Name="SearchButton" Content="Buscar" Width="70" Margin="0,0,10,0" Click="SearchButton_Click"/>
+
         </StackPanel>
 
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="5,5,5,45" Grid.ColumnSpan="7" Grid.RowSpan="2">

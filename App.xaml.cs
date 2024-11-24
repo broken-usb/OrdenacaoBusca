@@ -43,7 +43,7 @@ namespace ProjetoB2_OrdenacaoBusca
         {
             try
             {
-                var themeUri = new Uri($"Themes/{themeName}.xaml", UriKind.Relative);
+                var themeUri = new Uri($"/ProjetoB2_OrdenacaoBusca;component/Themes/{themeName}.xaml", UriKind.Relative);
                 var themeResource = new ResourceDictionary { Source = themeUri };
                 Resources.MergedDictionaries.Add(themeResource);
             }
